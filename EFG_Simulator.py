@@ -1,5 +1,5 @@
 '''
-Date: 2022.12.28
+Date: 2022.12.28(rev:2023.01.02)
 Title: 어구자동식별모니터링 데이터 시뮬레이터(Phase)
 By: Kang Jin Seong
 '''

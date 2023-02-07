@@ -1,5 +1,5 @@
 '''
-Date: 2023.02.06
+Date: 2023.02.07(rev1.1)
 Title: 3차원 해수유동 TRX_Controller_Simulator TDMS 생성 코드
 By: Kang Jin Seong
 '''
@@ -18,7 +18,8 @@ class Simulator:
         self.Tc = 1/self.Rc
         self.Fc = self.Rc * 4
         self.Fs = self.Fc * 10
-        self.taps = [8,7,6,1]
+        # self.taps = [8,7,6,1]   # 8order
+        self.taps = [6,8,11,12] # 12order
 
     def Mseq_GEN(self, order, index, taps):
         inidata = np.zeros(order)
@@ -43,7 +44,7 @@ class Simulator:
             y.extend(s_bb * carrier)
         y = np.array(y)
         print(len(y))
-        with TdmsWriter("F:/4. NI SW/3차원해수유동 국책과제/TRX_CONTROLLER_SIMULATRO_1.0/3. TDMS/Coef.tdms") as tdms_writer:
+        with TdmsWriter("F:/4. NI SW/3차원해수유동 국책과제/TRX_CONTROLLER_SIMULATRO_1.1/3. TDMS/Coef12.tdms") as tdms_writer:
             channel = ChannelObject('A', 'Data', y)
             tdms_writer.write_segment([channel])
             channel = ChannelObject('A', 'Mask', tempseq)
@@ -78,7 +79,7 @@ class Simulator:
         # plt.plot(filtered_y)
         
     def main(self):
-        coef, y = self.SIG_GEN(4,1,8,0)
+        coef, y = self.SIG_GEN(4,1,12,0)
         # self.sig(coef, y)
 if __name__ == "__main__":
     print('START')
